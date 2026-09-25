@@ -33,7 +33,7 @@ if ($day.Length -eq 0 -Or $path.Length -eq 0) {    # to verify if the variable i
     Write-Host "`nUnknown!! You have done something wrong!"
     print_usage
 } else {
-    if (Test-Path $path -PathType Container) {
+    if (Test-Path -LiteralPath $path -PathType Container) {
         if (-not ($day -as [int])) {
             Write-Host "Unknown!! The argument -D (days) must be an integer number!"
             Exit 3
