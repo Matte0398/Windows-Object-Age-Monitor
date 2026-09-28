@@ -5,7 +5,6 @@
 ## Author: Matteo Z.
 #######################################################################################################
 
-# parameter on a command-line
 Param (
     [Parameter(Mandatory = $true) ] [Alias('D')] $day,
     [Parameter(Mandatory = $true) ] [Alias('P')] $path
