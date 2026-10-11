@@ -4,7 +4,7 @@
 ## Author: Matteo Z.
 #############################################################################################
 
-# nables advanced script behavior and common parameters such as -Verbose, -Debug, and -ErrorAction
+# Enables advanced script behavior and common parameters such as -Verbose, -Debug, and -ErrorAction
 [CmdletBinding()]
 param(
     [Alias('P')]
@@ -18,7 +18,7 @@ param(
     [string]$OutputFile,
     [string]$LogFile,
 
-    [Alias('-json')]
+    [Alias('-Json')]
     [switch]$Json,
 
     [Alias('H')]
@@ -38,7 +38,7 @@ Parameters:
   -NoRecurse    Inspect immediate children only; recursive scanning is the default.
   -OutputFile   Export the full list of old objects and scan errors to CSV.
   -LogFile      Append scan diagnostics to the specified log file.
-  --json        JSON output.
+  -Json        JSON output.
   -Help, -H     Display this usage without scanning or creating files.
 
 Examples:
@@ -52,6 +52,20 @@ Age is based on LastWriteTime. Junctions and symbolic links are not traversed.
 '@
 }
 
+
+function Write-ScanLog {
+    param([string]$Level, [string]$Message)
+
+    if (-not $LogFile) {
+        return
+    }
+
+    $line = '{0} [{1}] {2}' -f (Get-Date -Format 'yyyy-MM-dd HH:mm:ss'), $Level, $Message
+    Add-Content -LiteralPath $LogFile -Value $line -Encoding UTF8 -ErrorAction Stop
+}
+
+
+########## MAIN ##########
 
 # A dictionary containing the parameters explicitly supplied by the caller and their values
 if ($Help -or $PSBoundParameters.Count -eq 0) {
@@ -83,18 +97,6 @@ $scannedCount = 0
 $exitCode = 3
 $status = 'UNKNOWN'
 $summary = ''
-
-function Write-ScanLog {
-    param([string]$Level, [string]$Message)
-
-    if (-not $LogFile) {
-        return
-    }
-
-    $line = '{0} [{1}] {2}' -f (Get-Date -Format 'yyyy-MM-dd HH:mm:ss'), $Level, $Message
-    Add-Content -LiteralPath $LogFile -Value $line -Encoding UTF8 -ErrorAction Stop
-}
-
 
 try {
     $cutoff = $scanTime.AddDays(-$Day)
