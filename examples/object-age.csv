@@ -1,0 +1,3 @@
+"Status","Type","Path","LastWriteTime","AgeDays","Details"
+"CRITICAL","File","C:\Exports\report.csv","2026-10-01 09:00:00","10",""
+"UNKNOWN","Error","C:\Exports\Restricted","","","Access to the path 'C:\Exports\Restricted' is denied."

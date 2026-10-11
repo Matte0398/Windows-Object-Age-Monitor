@@ -10,6 +10,7 @@ Use it to identify stale exports or accumulated objects. It does not delete or m
 - [Usage and parameters](#usage-and-parameters)
 - [Scan behavior](#scan-behavior)
 - [Output formats](#output-formats)
+- [Example files](#example-files)
 - [Status and exit codes](#status-and-exit-codes)
 - [Limitations and troubleshooting](#limitations-and-troubleshooting)
 - [License](#license)
@@ -136,6 +137,22 @@ Missing required parameters produce a shorter JSON object with `Status`, `ExitCo
 | `Details`       | Empty for old objects; error message for error rows; report summary for a summary row.              |
 
 A summary row is written when there are no old objects or scan errors. CSV output is a result report, not an inventory of every scanned object.
+
+## Example files
+
+The [examples](examples/) folder contains illustrative files for the same scenario: one old file and one inaccessible directory.
+
+| File                                        | Contents                                                        |
+| ------------------------------------------- | --------------------------------------------------------------- |
+| [object-age.csv](examples/object-age.csv)   | Old-object and scan-error rows, including the `Details` column. |
+| [object-age.json](examples/object-age.json) | Complete structured report with `OldObjects` and `ScanErrors`.  |
+| [object-age.log](examples/object-age.log)   | Scan start, directory access error and final summary.           |
+
+To produce equivalent output files for your own directory, first create the report directory, then run:
+
+```powershell
+.\Check-ObjectAge.ps1 -P 'C:\Exports' -D 2 -OutputFile 'C:\Reports\object-age.csv' -LogFile 'C:\Reports\object-age.log' -Json |
+```
 
 ## Status and exit codes
 

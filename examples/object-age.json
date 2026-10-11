@@ -1,0 +1,25 @@
+{
+  "Status": "UNKNOWN",
+  "ExitCode": 3,
+  "Summary": "UNKNOWN - 1 old object(s); 5 scanned; 1 inaccessible directories; threshold 2 day(s)",
+  "Path": "C:\\Exports",
+  "ThresholdDays": 2,
+  "Recursive": true,
+  "ScannedCount": 5,
+  "OldObjects": [
+    {
+      "Status": "CRITICAL",
+      "Type": "File",
+      "Path": "C:\\Exports\\report.csv",
+      "LastWriteTime": "2026-10-01 09:00:00",
+      "AgeDays": 10,
+      "Details": ""
+    }
+  ],
+  "ScanErrors": [
+    {
+      "Path": "C:\\Exports\\Restricted",
+      "Message": "Access to the path 'C:\\Exports\\Restricted' is denied."
+    }
+  ]
+}
