@@ -6,6 +6,7 @@ Use it to identify stale exports or accumulated objects. It does not delete or m
 
 ## Contents
 
+- [Repository structure](#repository-structure)
 - [Requirements](#requirements)
 - [Usage and parameters](#usage-and-parameters)
 - [Scan behavior](#scan-behavior)
@@ -14,6 +15,19 @@ Use it to identify stale exports or accumulated objects. It does not delete or m
 - [Status and exit codes](#status-and-exit-codes)
 - [Limitations and troubleshooting](#limitations-and-troubleshooting)
 - [License](#license)
+
+## Repository structure
+
+```text
+Windows-Object-Age-Monitor/
+|-- Check-ObjectAge.ps1
+|-- README.md
+|-- LICENSE
+`-- examples/
+    |-- object-age.csv
+    |-- object-age.json
+    `-- object-age.log
+```
 
 ## Requirements
 
