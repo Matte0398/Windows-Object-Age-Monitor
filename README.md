@@ -6,6 +6,7 @@ Use it to identify stale exports or accumulated objects. It does not delete or m
 
 ## Contents
 
+- [Features](#features)
 - [Repository structure](#repository-structure)
 - [Requirements](#requirements)
 - [Usage and parameters](#usage-and-parameters)
@@ -15,6 +16,18 @@ Use it to identify stale exports or accumulated objects. It does not delete or m
 - [Status and exit codes](#status-and-exit-codes)
 - [Limitations and troubleshooting](#limitations-and-troubleshooting)
 - [License](#license)
+
+## Features
+
+- Identify files and directories older than a configurable threshold based on their last modification time.
+- Scan recursively by default, with an option to inspect immediate children only.
+- Include hidden and system objects while avoiding traversal of child junctions and symbolic links.
+- Display a text summary or a complete JSON report.
+- Export old objects and directory-listing errors to CSV.
+- Append timestamped diagnostic messages to an optional log file.
+- Continue scanning accessible directories when directory-listing errors occur.
+- Return `OK`, `CRITICAL` or `UNKNOWN` status with corresponding monitoring exit codes.
+- Inspect objects without deleting or modifying them.
 
 ## Repository structure
 
@@ -78,7 +91,7 @@ The cutoff is calculated once using `(Get-Date).AddDays(-$Day)`. An object is ol
 
 The scan includes hidden/system objects through `Get-ChildItem -Force`. It evaluates each child directory's own timestamp, then scans its children unless `-NoRecurse` is set. The target directory itself is not evaluated as an old object.
 
-Child directories with the `ReparsePoint` attribute, including junctions and symbolic links, are not traversed to avoid loops. Their own metadata can still appear in the results. A reparse point supplied as the root path is not explicitly excluded.
+Child directories with the `ReparsePoint` attribute, including junctions and symbolic links, are not traversed to avoid loops. Their own metadata can still appear in the results.
 
 Directory-listing errors are recorded and scanning continues where possible. Any such error makes the overall status `UNKNOWN`, even if old objects were also found.
 
